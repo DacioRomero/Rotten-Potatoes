@@ -6,6 +6,12 @@ const mongoose       = require('mongoose');
 const bodyParser     = require('body-parser')
 
 const app = express();
+
+const Review = require('./models/review')
+const reviewsController = require("./controllers/reviews")
+const Comment = require('./models/comment')
+const commentsController = require('./controllers/comments')
+
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -13,10 +19,10 @@ app.use(methodOverride('_method'))
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/rotten-potatoes', { useNewUrlParser: true });
 
-reviews = require("./controllers/reviews")
-reviews(app)
+reviewsController(app)
+reviewsController(app)
 
-let port = process.env.PORT || 3000
+let port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log('App listening on port ' + port + '!');
 });
