@@ -16,6 +16,7 @@ mongoose.connect(process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb
 reviews = require("./controllers/reviews")
 reviews(app)
 
-app.listen(process.env.PORT || 3000, () => {
-    console.log('App listening on port 3000!')
+let port = process.env.PORT || 3000
+app.listen(port, () => {
+    console.log('App listening on port ' + port + '!');
 });
