@@ -1,4 +1,5 @@
-// models/eview.js
+// models/review.js
+
 const mongoose = require('mongoose');
 
 const Review = mongoose.model('Review', {
@@ -8,4 +9,4 @@ const Review = mongoose.model('Review', {
     stars: Number,
 });
 
-module.exports = Review
+module.exports = Review;
