@@ -1,14 +1,16 @@
 // app.js
-const express = require('express');
+const express        = require('express');
+const exphbs         = require('express-handlebars');
+const methodOverride = require('method-override')
+const mongoose       = require('mongoose');
+const bodyParser     = require('body-parser')
+
 const app = express();
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser')
-
-var exphbs = require('express-handlebars');
-
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride('_method'))
+
 mongoose.connect('mongodb://localhost/rotten-potatoes', { useMongoClient: true });
 
 const Review = mongoose.model('Review', {
@@ -58,6 +60,24 @@ app.get('/reviews/:id', (req, res) => {
     }).catch((err) => {
         console.log(err.message);
     });
+});
+
+// EDIT
+app.get('/reviews/:id/edit', function (req, res) {
+    Review.findById(req.params.id, function(err, review) {
+        res.render('reviews-edit', {review: review});
+    });
+});
+
+// UPDATE
+app.put('/reviews/:id', (req, res) => {
+    Review.findByIdAndUpdate(req.params.id, req.body)
+        .then(review => {
+            res.redirect(`/reviews/${review._id}`)
+        })
+        .catch(err => {
+            console.log(err.message)
+        });
 });
 
 app.listen(3000, () => {
