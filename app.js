@@ -11,8 +11,7 @@ app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'))
 
-mongoose.connect('mongodb://localhost/rotten-potatoes', { useMongoClient: true });
-
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/rotten-potatoes');
 
 // // OUR MOCK ARRAY OF PROJECTS
 // let reviews = [
