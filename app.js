@@ -22,7 +22,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/rotten-potatoes
 reviewsController(app)
 commentsController(app)
 
-let port = process.env.PORT || 3000;
+let port = process.env.PORT || 3001;
 app.listen(port, () => {
     console.log('App listening on port ' + port + '!');
 });
