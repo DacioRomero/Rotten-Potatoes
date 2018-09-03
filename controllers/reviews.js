@@ -3,7 +3,7 @@
 const Review = require('../models/review')
 const Comment = require('../models/comment')
 
-function reviews (app) {
+function reviewsController (app) {
 
   app.get('/', (req, res) => {
     Review.find()
@@ -23,11 +23,7 @@ function reviews (app) {
   // CREATE
   app.post('/reviews', (req, res) => {
       Review.create(req.body).then((review) => {
-          // fetch its comments
-          Comment.find({ reviewId: req.params.id }).then(comments => {
-              // respond with the template with both values
-              res.render('reviews-show', { review: review, comments: comments });
-          });
+          res.redirect(`/reviews/${review._id}`)
       }).catch((err) => {
           console.log(err.message)
       });
@@ -35,15 +31,11 @@ function reviews (app) {
 
   // SHOW
   app.get('/reviews/:id', (req, res) => {
-      // find review
       Review.findById(req.params.id).then(review => {
-          // fetch its comments
           Comment.find({ reviewId: req.params.id }).then(comments => {
-              // respond with the template with both values
               res.render('reviews-show', { review: review, comments: comments });
           })
       }).catch((err) => {
-          // catch errors
           console.log(err.message);
       });
   });
@@ -78,4 +70,4 @@ function reviews (app) {
 
 }
 
-module.exports = reviews
+module.exports = reviewsController;

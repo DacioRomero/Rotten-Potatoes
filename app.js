@@ -20,7 +20,7 @@ app.use(methodOverride('_method'))
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/rotten-potatoes', { useNewUrlParser: true });
 
 reviewsController(app)
-reviewsController(app)
+commentsController(app)
 
 let port = process.env.PORT || 3000;
 app.listen(port, () => {
