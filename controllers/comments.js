@@ -2,7 +2,7 @@
 
 const Comment = require('../models/comment')
 
-function comments (app) {
+function commentsController (app) {
     // CREATE Comment
     app.post('/reviews/comments', (req, res) => {
         Comment.create(req.body).then(comment => {
@@ -23,4 +23,4 @@ function comments (app) {
     });
 }
 
-module.exports = comments;
+module.exports = commentsController;
