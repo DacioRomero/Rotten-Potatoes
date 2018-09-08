@@ -3,7 +3,8 @@ const express        = require('express');
 const exphbs         = require('express-handlebars');
 const methodOverride = require('method-override')
 const mongoose       = require('mongoose');
-const bodyParser     = require('body-parser')
+const bodyParser     = require('body-parser');
+const path           = require('path');
 
 const app = express();
 
