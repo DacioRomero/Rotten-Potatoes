@@ -12,8 +12,14 @@ const reviewsController = require("./controllers/reviews")
 const Comment = require('./models/comment')
 const commentsController = require('./controllers/comments')
 
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
-app.set('view engine', 'handlebars');
+app.engine('handlebars', exphbs({
+    layoutsDir: path.join(__dirname, '/views/layouts/'),
+    partialsDir: path.join(__dirname, '/views/partials/'),
+    defaultLayout: 'main'
+}));
+
+app.set('views', path.join(__dirname, '/views'));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'))
 
@@ -22,7 +28,12 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/rotten-potatoes
 reviewsController(app)
 commentsController(app)
 
-let port = process.env.PORT || 3001;
-app.listen(port, () => {
-    console.log('App listening on port ' + port + '!');
-});
+if (require.main === module) {
+    let port = process.env.PORT || 3000;
+
+    app.listen(port, () => {
+        console.log('App listening on port ' + port + '!');
+    });
+}
+
+module.exports = app
