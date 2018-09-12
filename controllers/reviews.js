@@ -16,26 +16,27 @@ function reviewsController (app) {
   // });
 
   // NEW
-  app.get('/reviews/new', (req, res) => {
-      res.render('reviews-new', {});
+  app.get('/movies/:movieId/reviews/new', (req, res) => {
+      res.render('reviews-new', { movieId: req.params.movieId });
   });
 
   // CREATE
-  app.post('/reviews', (req, res) => {
+  app.post('/movies/:movieId/reviews', (req, res) => {
+      console.log(`CREATE review`);
       Review.create(req.body)
           .then((review) => {
-              res.redirect(`/reviews/${review._id}`);
+              res.redirect(`/movies/${req.params.movieId}/reviews/${review._id}`);
           }).catch((err) => {
               console.log(err.message);
           });
   });
 
   // SHOW
-  app.get('/reviews/:id', (req, res) => {
+  app.get('/movies/:movieId/reviews/:id', (req, res) => {
       Review.findById(req.params.id)
           .then(review => {
               Comment.find({ reviewId: req.params.id }).then(comments => {
-                  res.render('reviews-show', { review: review, comments: comments });
+                  res.render('reviews-show', { review: review, comments: comments, movieId: req.params.movieId });
               })
           }).catch((err) => {
               console.log(err.message);
@@ -43,17 +44,18 @@ function reviewsController (app) {
   });
 
   // EDIT
-  app.get('/reviews/:id/edit', function (req, res) {
+  app.get('/movies/:movieId/reviews/:id/edit', function (req, res) {
       Review.findById(req.params.id, (err, review) => {
-          res.render('reviews-edit', { review: review });
+          res.render('reviews-edit', { review: review, movieId: req.params.movieId });
       });
   });
 
   // UPDATE
-  app.put('/reviews/:id', (req, res) => {
+  app.put('/movies/:movieId/reviews/:id', (req, res) => {
+      console.log(`UPDATE review: ${req.params.id}`);
       Review.findByIdAndUpdate(req.params.id, req.body)
           .then(review => {
-              res.redirect(`/reviews/${review._id}`);
+              res.redirect(`/movies/${req.params.movieId}/reviews/${review._id}`);
           })
           .catch(err => {
               console.log(err.message);
@@ -61,11 +63,11 @@ function reviewsController (app) {
   });
 
   // DELETE
-  app.delete('/reviews/:id', function (req, res) {
-      console.log("DELETE review")
+  app.delete('/movies/:movieId/reviews/:id', function (req, res) {
+      console.log(`DELETE review: ${req.params.id}`);
       Review.findByIdAndRemove(req.params.id)
           .then((review) => {
-              res.redirect('/');
+              res.redirect(`/movies/${req.params.movieId}`);
           }).catch((err) => {
               console.log(err.message);
           });
