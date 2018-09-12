@@ -11,6 +11,7 @@ const path           = require('path');
 // MIDDLEWARE
 const app = express();
 
+const moviesController = require('./controllers/movies')
 const Review = require('./models/review')
 const reviewsController = require("./controllers/reviews")
 const Comment = require('./models/comment')
@@ -32,8 +33,9 @@ app.use(methodOverride('_method'))
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/rotten-potatoes', { useNewUrlParser: true });
 
 // ROUTES
-reviewsController(app)
-commentsController(app)
+moviesController(app);
+reviewsController(app);
+commentsController(app);
 
 // LISTENER - only if directly run
 if (require.main === module) {
