@@ -11,12 +11,6 @@ const path           = require('path');
 // MIDDLEWARE
 const app = express();
 
-const moviesController = require('./controllers/movies')
-const Review = require('./models/review')
-const reviewsController = require("./controllers/reviews")
-const Comment = require('./models/comment')
-const commentsController = require('./controllers/comments')
-
 app.engine('handlebars', exphbs({
     layoutsDir: path.join(__dirname, '/views/layouts/'),
     partialsDir: path.join(__dirname, '/views/partials/'),
@@ -27,12 +21,17 @@ app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'handlebars');
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(methodOverride('_method'))
+app.use(methodOverride('_method'));
+app.use(express.static(path.join(__dirname, '/public')));
 
 // DATABASE
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/rotten-potatoes', { useNewUrlParser: true });
 
 // ROUTES
+const moviesController = require('./controllers/movies');
+const reviewsController = require("./controllers/reviews");
+const commentsController = require('./controllers/comments');
+
 moviesController(app);
 reviewsController(app);
 commentsController(app);

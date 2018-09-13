@@ -5,11 +5,12 @@ const Comment = require('../models/comment');
 function commentsController (app) {
     // CREATE
     app.post('/reviews/comments', (req, res) => {
+        console.log(req.body)
         Comment.create(req.body)
             .then(comment => {
-                res.redirect(`/reviews/${comment.reviewId}`);
+                res.status(200).send({ comment: comment });
             }).catch((err) => {
-                console.log(err.message);
+                res.status(400).send({ err: err });
             });
     });
 
