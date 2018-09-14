@@ -31,10 +31,12 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/rotten-potatoes
 const moviesController = require('./controllers/movies');
 const reviewsController = require("./controllers/reviews");
 const commentsController = require('./controllers/comments');
+const adminController = require('./controllers/admin');
 
 moviesController(app);
 reviewsController(app);
 commentsController(app);
+adminController(app);
 
 // LISTENER - only if directly run
 if (require.main === module) {
