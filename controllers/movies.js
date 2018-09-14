@@ -25,6 +25,7 @@ function moviesController(app){
             moviedb.movieVideos({ id: req.params.id })
             .then(videos => {
                 movie.trailer_youtube_id = videos.results[0].key
+
                 Review.find({ movieId: req.params.id })
                 .then(reviews => {
                     res.render('movies-show', { movie: movie, reviews: reviews });
@@ -35,4 +36,5 @@ function moviesController(app){
         .catch(console.error);
     });
 }
+
 module.exports = moviesController;
