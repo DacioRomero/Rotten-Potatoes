@@ -1,21 +1,13 @@
 // javascript/scripts.js
-
-// listen for a form submit event\
 $('#newComment').submit(e => {
-    // prevent the default form behavior
     e.preventDefault();
-    // serialize the form data into an object
-    let comment = $(e.target).serialize();
-    console.log(comment)
 
-    // use axios to initialize a post request and send in the form data
+    let comment = $(e.target).serialize();
+
     axios.post('/reviews/comments', comment)
     .then(response => {
-        // wait for the success response from the server
-        console.log(response);
-        // remove the information from the form
         e.target.reset();
-        // display the data as a new comment on the page
+
         $('#comments').prepend(
             `
             <div class="card" id="${response.data.comment._id}">
@@ -32,14 +24,13 @@ $('#newComment').submit(e => {
     })
     .catch(function (error) {
         console.log(error);
-        // handle any errors
-        alert('There was a problem saving your comment. Please trys again.')
+        alert('There was a problem saving your comment. Please try again.')
     });
 });
 
 $('#comments').on('click', '.deleteComment', e => {
-    console.log('Click!');
     let commentId = $(e.target).attr('data-comment-id');
+
     axios.delete(`/reviews/comments/${commentId}`)
     .then(response => {
         console.log(response);
@@ -48,4 +39,17 @@ $('#comments').on('click', '.deleteComment', e => {
     .catch(error => {
         console.log(error);
     });
-})
+});
+
+$('.deleteReview').click(e => {
+    let reviewId = $(e.target).attr('data-review-id');
+
+    axios.delete(`/admin/reviews/${reviewId}`)
+    .then(response => {
+        console.log(response);
+        $(`#${reviewId}`).remove();
+    })
+    .catch(error => {
+        console.log(error);
+    });
+});
