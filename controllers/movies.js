@@ -16,11 +16,20 @@ moviedb.genreMovieList()
 module.exports = app => {
     // INDEX Movies
     app.get('/', (req, res) => {
-        moviedb.miscNowPlayingMovies()
-        .then(response => {
-            res.render('movies-index', { movies: response.results, genreDict: genres });
-        })
-        .catch(console.error);
+        if(req.query.query){
+            moviedb.searchMovie(req.query)
+            .then(response => {
+                res.render('movies-index', { title: req.query.query, movies: response.results, genreDict: genres });
+            })
+            .catch(console.error);
+        }
+        else {
+            moviedb.miscNowPlayingMovies()
+            .then(response => {
+                res.render('movies-index', { title: 'Now Playing', movies: response.results, genreDict: genres });
+            })
+            .catch(console.error);
+        }
     });
 
     // SHOW Movie

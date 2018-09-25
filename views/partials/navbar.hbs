@@ -1,8 +1,14 @@
 <!-- views/partials/navbar.handlebars -->
 
-<nav class="navbar navbar-dark bg-dark">
-  <a class="navbar-brand" href="/">Rotten Potatoes</a>
-  <div class="margin-right-auto">
-    <a href="/reviews/new" class="btn btn-secondary navbar-btn">New Review</a>
-  </div>
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+    <a class="navbar-brand" href="/">Rotten Potatoes</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <form class="form-inline ml-auto" method="GET">
+        <input class="form-control mr-sm-2" type="search" name="query" placeholder="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
 </nav>

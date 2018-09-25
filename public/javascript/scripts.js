@@ -22,7 +22,6 @@ $('#comments').on('click', '.deleteComment', e => {
 
     axios.delete(`/reviews/comments/${commentId}`)
     .then(response => {
-        console.log(response);
         $(`#${commentId}`).remove();
     })
     .catch(console.error);
@@ -34,7 +33,6 @@ $('.deleteReview').click(e => {
 
     axios.delete(`/admin/reviews/${reviewId}`)
     .then(response => {
-        console.log(response);
         $(`#${reviewId}`).remove();
     })
     .catch(console.error);
