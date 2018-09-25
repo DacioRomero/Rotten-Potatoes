@@ -19,7 +19,7 @@ module.exports = app => {
         if(req.query.query){
             moviedb.searchMovie(req.query)
             .then(response => {
-                res.render('movies-index', { title: req.query.query, movies: response.results, genreDict: genres });
+                res.render('movies-index', { title: `Search results: ${req.query.query}`, movies: response.results, genreDict: genres });
             })
             .catch(console.error);
         }
