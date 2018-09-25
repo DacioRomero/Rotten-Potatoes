@@ -13,6 +13,10 @@
   },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DacioRomero/Rotten-Potatoes/issues"
+  },
+  "homepage": "https://github.com/DacioRomero/Rotten-Potatoes#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
     "chai": "^4.1.2",
