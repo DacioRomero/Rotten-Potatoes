@@ -11,14 +11,15 @@ const path           = require('path');
 // MIDDLEWARE
 const app = express();
 
-app.engine('handlebars', exphbs({
+app.engine('hbs', exphbs({
+    extname: '.hbs',
     layoutsDir: path.join(__dirname, '/views/layouts/'),
     partialsDir: path.join(__dirname, '/views/partials/'),
     defaultLayout: 'main'
 }));
 
 app.set('views', path.join(__dirname, '/views'));
-app.set('view engine', 'handlebars');
+app.set('view engine', 'hbs');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
@@ -28,15 +29,10 @@ app.use(express.static(path.join(__dirname, '/public')));
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/rotten-potatoes', { useNewUrlParser: true });
 
 // ROUTES
-const moviesController = require('./controllers/movies');
-const reviewsController = require("./controllers/reviews");
-const commentsController = require('./controllers/comments');
-const adminController = require('./controllers/admin');
-
-moviesController(app);
-reviewsController(app);
-commentsController(app);
-adminController(app);
+require('./controllers/movies')(app);
+require("./controllers/reviews")(app);
+require('./controllers/comments')(app);
+require('./controllers/admin')(app);
 
 // LISTENER - only if directly run
 if (require.main === module) {

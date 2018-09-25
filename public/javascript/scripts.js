@@ -1,4 +1,6 @@
 // javascript/scripts.js
+
+// for /movies/:movieId/reviews/:id
 $('#newComment').submit(e => {
     e.preventDefault();
 
@@ -7,24 +9,11 @@ $('#newComment').submit(e => {
     axios.post('/reviews/comments', comment)
     .then(response => {
         e.target.reset();
-
-        $('#comments').prepend(
-            `
-            <div class="card" id="${response.data.comment._id}">
-                <div class="card-block">
-                    <h4 class="card-title">${response.data.comment.title}</h4>
-                    <p class="card-text">${response.data.comment.content}</p>
-                    <p>
-                        <button class="btn btn-link deleteComment" data-comment-id=${response.data.comment._id}>Delete</button>
-                    </p>
-                </div>
-            </div>
-            `
-        );
+        $('#comments').prepend(response.data);
     })
-    .catch(function (error) {
-        console.log(error);
-        alert('There was a problem saving your comment. Please try again.')
+    .catch(err => {
+        console.error(err);
+        alert('There was a problem saving your comment. Please try again.');
     });
 });
 
@@ -36,11 +25,10 @@ $('#comments').on('click', '.deleteComment', e => {
         console.log(response);
         $(`#${commentId}`).remove();
     })
-    .catch(error => {
-        console.log(error);
-    });
+    .catch(console.error);
 });
 
+// for /admin
 $('.deleteReview').click(e => {
     let reviewId = $(e.target).attr('data-review-id');
 
@@ -49,7 +37,5 @@ $('.deleteReview').click(e => {
         console.log(response);
         $(`#${reviewId}`).remove();
     })
-    .catch(error => {
-        console.log(error);
-    });
+    .catch(console.error);
 });

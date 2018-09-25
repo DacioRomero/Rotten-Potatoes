@@ -1,18 +1,13 @@
 <!-- views/partials/reviews-form.handlebars -->
 
 <fieldset>
-    <legend>New Review</legend>
+    <legend>{{#if review}}Edit{{else}}New{{/if}} Review</legend>
     <input type="hidden" name="movieId" value="{{movieId}}">
+
     <!-- TITLE -->
     <div class="form-group">
         <label for="review-title">Title</label><br>
         <input class="form-control" id="review-title" type="text" name="title" value="{{review.title}}" />
-    </div>
-
-    <!-- MOVIE TITLE -->
-    <div class="form-group">
-        <label for="movie-title">Movie Title</label><br>
-        <input class="form-control" id="movie-title" type="text" name="movieTitle" value="{{review.movieTitle}}" />
     </div>
 
     <!-- DESCRIPTION -->
@@ -24,7 +19,7 @@
     <!-- RATING -->
     <div class="form-group">
         <label for="stars-number">Stars</label><br>
-        <select class="form-control" id="stars-number" name="starsNumber" value="{{review.stars}}">
+        <select class="form-control" id="stars-number" name="stars" value="{{review.stars}}">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -32,6 +27,7 @@
             <option value="5">5</option>
         </select>
     </div>
+
     <div class="form-group">
         <button class="btn btn-primary" type="submit">Save Review</button>
         <a class="btn btn-primary" href="/movies/{{movieId}}">Cancel</a>

@@ -2,27 +2,25 @@
 
 const Comment = require('../models/comment');
 
-function commentsController (app) {
-    // CREATE
+module.exports = app => {
+    // CREATE Comment
     app.post('/reviews/comments', (req, res) => {
         Comment.create(req.body)
         .then(comment => {
-            res.status(200).send({ comment: comment });
+            res.render('partials/comment', { layout: false, comment: comment });
         }).catch((err) => {
-            res.status(400).send({ err: err });
+            res.status(400).send(error);
         });
     });
 
-    // DELETE
-    app.delete('/reviews/comments/:id', function (req, res) {
-        console.log("DELETE comment")
-        Comment.findByIdAndRemove(req.params.id).then(comment => {
+    // DELETE Comment
+    app.delete('/reviews/comments/:id', (req, res) => {
+        Comment.findByIdAndRemove(req.params.id)
+        .then(comment => {
             res.status(200).send(comment);
         }).catch((err) => {
-            console.log(err.message);
-            res.status(400).send(err)
-        })
+            console.error(err);
+            res.status(400).send(err);
+        });
     })
 }
-
-module.exports = commentsController;

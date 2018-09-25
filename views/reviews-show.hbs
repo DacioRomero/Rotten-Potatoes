@@ -1,25 +1,25 @@
 <!-- views/reviews-show.handlebars -->
-<a href="/movies/{{movieId}}">Back</a>
+
+<a href="/movies/{{review.movieId}}">Back</a>
 <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
         <h1>{{review.title}}</h1>
-        <h2>{{review.movieTitle}}</h2>
         <p>{{review.description}}</p>
-        <p><a href="/movies/{{movieId}}/reviews/{{review._id}}/edit">Edit</a></p>
-        <p><form method="POST" action="/movies/{{movieId}}/reviews/{{review._id}}?_method=DELETE">
+        <p><a href="/movies/{{review.movieId}}/reviews/{{review._id}}/edit">Edit</a></p>
+        <p><form method="POST" action="/movies/{{review.movieId}}/reviews/{{review._id}}?_method=DELETE">
             <button class="btn btn-primary" type="submit">Delete</button>
         </form></p>
 
         <hr>
 
-        {{> comment-form}}
+        {{> comment-form reviewId=review._id }}
 
         <hr>
 
         <!-- Show Comments -->
         <div id="comments">
             {{#each comments}}
-                {{> comment}}
+                {{> comment comment=this }}
             {{/each}}
         </div>
     </div>

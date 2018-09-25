@@ -1,7 +1,7 @@
 <!-- views/partials/comment-form.handlebars -->
 
 <form action="#" id="newComment">
-    <input type="hidden" value="{{review._id}}" name="reviewId">
+    <input type="hidden" value="{{reviewId}}" name="reviewId">
     <fieldset>
         <legend>Add a Comment</legend>
         <!-- TITLE -->
@@ -12,7 +12,8 @@
             type="text"
             name="title"
             placeholder="Title"
-            required/>
+            required
+            value="{{comment.title}}"/>
         </div>
 
         <!-- DESCRIPTION -->
@@ -23,7 +24,7 @@
             name="content"
             rows="10"
             placeholder="Your comment..."
-            required></textarea>
+            required>{{comment.content}}</textarea>
         </div>
     </fieldset>
 

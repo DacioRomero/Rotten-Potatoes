@@ -15,7 +15,6 @@ const sampleReview = {
 chai.use(chaiHttp);
 
 describe('Reviews', ()  => {
-
     // TEST INDEX
     it('should index ALL reviews on / GET', (done) => {
         chai.request(server)
