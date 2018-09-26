@@ -1,11 +1,11 @@
 <!-- views/partials/review.handlebars -->
 
 <div>
-    <h1><a href="/movies/{{this.movieId}}/reviews/{{this._id}}">{{this.title}}</a></h1>
-    <p>{{this.description}}</p>
-    <p><a href="/reviews/{{this._id}}/edit">Edit</a></p>
+    <h1><a href="/movies/{{review.movieId}}/reviews/{{review._id}}">{{review.title}}</a></h1>
+    <p>{{review.description}}</p>
+    <p><a href="/reviews/{{review._id}}/edit">Edit</a></p>
     <p>
-        <form method="POST" action="/movies/{{this.movieId}}/reviews/{{this._id}}?_method=DELETE">
+        <form method="POST" action="/movies/{{review.movieId}}/reviews/{{review._id}}?_method=DELETE">
             <button class="btn btn-primary" type="submit">Delete</button>
         </form>
     </p>

@@ -14,6 +14,7 @@ const sampleReview = {
 
 chai.use(chaiHttp);
 
+// TODO: Update current tests and add new ones for full coverage
 describe('Reviews', ()  => {
     // TEST INDEX
     it('should index ALL reviews on / GET', (done) => {

@@ -8,16 +8,16 @@
         <h1>{{movie.title}}</h1>
         <p class="lead">{{movie.overview}}</p>
     </div>
-    <div class="col-sm-12 embed-responsive embed-responsive-16by9">
+    <div class="col-sm-12 embed-responsive embed-responsive-16by9 my-2">
         <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{movie.trailer_youtube_id}}?rel=0"></iframe>
     </div>
 </div>
 <div>
-<div class="container clearfix pt-2">
+<div class="container clearfix">
     <h3 class="float-left">Reviews</h3>
     <a href="/movies/{{movie.id}}/reviews/new" class="btn btn-primary float-right">Write Review</a>
 </div>
 
 {{#each reviews}}
-    {{> review }}
+    {{> review review=this }}
 {{/each}}

@@ -1,12 +1,16 @@
 <!-- views/movies-index -->
 
 <h1>{{title}}</h1>
-<div class="row align-items-end">
+<div class="row align-items-start">
     {{#each movies}}
-    <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-2 text-center">
-        <a href="/movies/{{this.id}}"><h3>{{this.title}}</h3></a>
-        <p><small>{{#each this.genre_ids}} <a href="/?genreId={{this}}">{{lookup ../../genreDict this}}</a>{{/each}}</small></p>
-        <a href="/movies/{{this.id}}"><img src="https://image.tmdb.org/t/p/w92{{this.poster_path}}" /></a>
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center my-1">
+        <div class="card">
+            <a href="/movies/{{this.id}}"><img class="card-img-top" src="https://image.tmdb.org/t/p/w300{{this.poster_path}}" /></a>
+            <div class="card-body">
+                <a href="/movies/{{this.id}}"><h3 class="card-title">{{this.title}}</h3></a>
+                <p class="card-text"><small>{{#each this.genre_ids}} <a href="/?genreId={{this}}">{{lookup ../../genreDict this}}</a>{{/each}}</small></p>
+            </div>
+        </div>
     </div>
     {{/each}}
 </div>

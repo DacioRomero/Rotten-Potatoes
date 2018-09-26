@@ -17,7 +17,8 @@ module.exports = app => {
         Review.findByIdAndRemove(req.params.id)
         .then(review => {
             res.status(200).send(review);
-        }).catch(err => {
+        })
+        .catch(err => {
             console.error(err);
             res.status(400).send(err);
         });
