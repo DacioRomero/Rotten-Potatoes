@@ -17,9 +17,16 @@ module.exports = app => {
     // INDEX Movies
     app.get('/', (req, res) => {
         if(req.query.query){
-            moviedb.searchMovie(req.query)
+            moviedb.searchMovie({ query: req.query.query })
             .then(response => {
                 res.render('movies-index', { title: `Search results: ${req.query.query}`, movies: response.results, genreDict: genres });
+            })
+            .catch(console.error);
+        }
+        else if (req.query.genreId) {
+            moviedb.genreMovies({ id: req.query.genreId })
+            .then(response => {
+                res.render('movies-index', { title: `${genres[req.query.genreId]} movies`, movies: response.results, genreDict: genres });
             })
             .catch(console.error);
         }
