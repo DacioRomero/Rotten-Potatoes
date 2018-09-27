@@ -1,7 +1,7 @@
 // movies.js
 
 const MovieDb = require('moviedb-promise');
-const moviedb = new MovieDb('***REMOVED***');
+const moviedb = new MovieDb(process.env.TMDB_KEY);
 const Review  = require('../models/review');
 const genres  = {};
 

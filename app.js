@@ -8,6 +8,8 @@ const mongoose       = require('mongoose');
 const bodyParser     = require('body-parser');
 const path           = require('path');
 
+require('dotenv').config()
+
 // MIDDLEWARE
 const app = express();
 
